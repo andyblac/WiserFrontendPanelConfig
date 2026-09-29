@@ -1,6 +1,6 @@
 {
   "name": "wiser-frontend-panel-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Card and panel registry for the Wiser Home Assistant integration",
   "license": "MIT",
