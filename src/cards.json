@@ -17,10 +17,13 @@
   },
   {
     "id": "rooms",
-    "name": "Wiser Rooms Card",
-    "filename": "wiser-rooms-card.js",
-    "repository": "andyblac/wiser-rooms-card",
-    "component": "wiser-rooms-card",
-    "panel": "wiser-rooms-panel"
+    "name": "Wiser Controls Card",
+    "filename": "wiser-controls-card.js",
+    "legacy_filenames": [
+      "wiser-rooms-card.js"
+    ],
+    "repository": "andyblac/wiser-controls-card",
+    "component": "wiser-controls-card",
+    "panel": "wiser-controls-panel"
   }
 ]

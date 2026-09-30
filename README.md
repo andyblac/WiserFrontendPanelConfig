@@ -11,6 +11,24 @@ npm run build:dev
 
 Development builds produce `dist/cards.json`. Published GitHub releases attach the validated `cards.json` artifact for integration release builds.
 
+The published artifact uses a versioned registry envelope:
+
+```json
+{
+  "schema_version": 1,
+  "cards": []
+}
+```
+
+The integration also accepts the original plain card array for backward
+compatibility. An unknown schema version is rejected without replacing the last
+working registry.
+
+Compatible Wiser integration versions expose this registry as its own Home
+Assistant update entity. They check releases on the same schedule and channel as
+the card updaters, but only download and activate `cards.json` when Update is
+pressed. The installed registry version is the GitHub release tag.
+
 ## Adding a card or panel
 
 Publish the card repository's JavaScript release, add its definition to
@@ -22,7 +40,10 @@ bundles are cached for offline use.
 
 All metadata lives here: the card ID, name, filename, repository, custom element,
 and optional panel custom element. Set `panel` to `null` for a card-only bundle.
-The ID is a stable settings/update identity, independent of the filename.
+The ID is a stable settings/update identity, independent of the filename. When
+renaming a bundle, add its previous name to `legacy_filenames`; compatible Wiser
+integration versions then move the existing Lovelace resource to the new bundle
+after the user installs its update.
 
 Panels receive `hass` and `panel.config`, including `panel_id`, `hubs`, `hub_ids`,
 `card_configs` and `card_url`. Save settings with the shared administrator-only
