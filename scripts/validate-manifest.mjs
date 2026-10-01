@@ -7,12 +7,13 @@ function validateManifest(cards) {
     for (const field of ["id", "name", "filename", "repository", "component"]) {
       if (typeof card[field] !== "string" || !card[field].trim()) throw new Error(`Card ${index} has invalid ${field}`);
     }
+    if (card.card !== undefined && typeof card.card !== "boolean") throw new Error(`Invalid card flag for ${card.id}`);
     if (!/^[a-z0-9-]+$/.test(card.id)) throw new Error(`Invalid card id: ${card.id}`);
-    if (!/^wiser-[a-z0-9-]+-card\.js$/.test(card.filename)) throw new Error(`Invalid card filename: ${card.filename}`);
+    if (!/^wiser-[a-z0-9-]+-(?:card|panel)\.js$/.test(card.filename)) throw new Error(`Invalid card filename: ${card.filename}`);
     const legacyFilenames = card.legacy_filenames ?? [];
     if (!Array.isArray(legacyFilenames)) throw new Error(`Invalid legacy filenames for ${card.id}`);
     for (const filename of legacyFilenames) {
-      if (typeof filename !== "string" || !/^wiser-[a-z0-9-]+-card\.js$/.test(filename)) {
+      if (typeof filename !== "string" || !/^wiser-[a-z0-9-]+-(?:card|panel)\.js$/.test(filename)) {
         throw new Error(`Invalid legacy card filename: ${filename}`);
       }
     }

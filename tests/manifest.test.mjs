@@ -13,6 +13,15 @@ test("the card registry is valid and identifiers are unique", () => {
     manifest.find(card => card.id === "rooms").legacy_filenames,
     ["wiser-rooms-card.js"],
   );
+  assert.deepEqual(manifest.find(card => card.id === "hub"), {
+    id:"hub",
+    name:"Wiser Hub Panel",
+    filename:"wiser-hub-panel.js",
+    repository:"andyblac/wiser-hub-panel",
+    component:"wiser-hub-panel",
+    panel:"wiser-hub-panel",
+    card:false,
+  });
 });
 
 test("the versioned registry remains backward compatible with card arrays", () => {
@@ -33,5 +42,13 @@ test("invalid and duplicate cards are rejected", () => {
   assert.throws(
     () => validateManifest([{...manifest[0], legacy_filenames:["../unsafe.js"]}]),
     /Invalid legacy card filename/,
+  );
+  assert.throws(
+    () => validateManifest([{...manifest[0], filename:"wiser-unsafe-widget.js"}]),
+    /Invalid card filename/,
+  );
+  assert.throws(
+    () => validateManifest([{...manifest[0], card:"no"}]),
+    /Invalid card flag/,
   );
 });

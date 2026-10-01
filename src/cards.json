@@ -25,5 +25,14 @@
     "repository": "andyblac/wiser-controls-card",
     "component": "wiser-controls-card",
     "panel": "wiser-controls-panel"
+  },
+  {
+    "id": "hub",
+    "name": "Wiser Hub Panel",
+    "filename": "wiser-hub-panel.js",
+    "repository": "andyblac/wiser-hub-panel",
+    "component": "wiser-hub-panel",
+    "panel": "wiser-hub-panel",
+    "card": false
   }
 ]
